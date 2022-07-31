@@ -1,0 +1,2 @@
+simulation
+-DCATKIN_DEVEL_PREFIX=/home/marcel/inz_ws/devel -DCMAKE_INSTALL_PREFIX=/home/marcel/inz_ws/install -G Unix Makefiles
