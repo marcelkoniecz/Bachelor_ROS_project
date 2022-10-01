@@ -35,6 +35,14 @@
 /home/marcel/inz_ws/build/gtest/googlemock/gtest/CMakeFiles/list_install_components.dir
 /home/marcel/inz_ws/build/gtest/googlemock/gtest/CMakeFiles/gtest.dir
 /home/marcel/inz_ws/build/gtest/googlemock/gtest/CMakeFiles/rebuild_cache.dir
+/home/marcel/inz_ws/build/dataHandle/CMakeFiles/install/strip.dir
+/home/marcel/inz_ws/build/dataHandle/CMakeFiles/install/local.dir
+/home/marcel/inz_ws/build/dataHandle/CMakeFiles/test.dir
+/home/marcel/inz_ws/build/dataHandle/CMakeFiles/list_install_components.dir
+/home/marcel/inz_ws/build/dataHandle/CMakeFiles/edit_cache.dir
+/home/marcel/inz_ws/build/dataHandle/CMakeFiles/_catkin_empty_exported_target.dir
+/home/marcel/inz_ws/build/dataHandle/CMakeFiles/rebuild_cache.dir
+/home/marcel/inz_ws/build/dataHandle/CMakeFiles/install.dir
 /home/marcel/inz_ws/build/simulation/CMakeFiles/install.dir
 /home/marcel/inz_ws/build/simulation/CMakeFiles/list_install_components.dir
 /home/marcel/inz_ws/build/simulation/CMakeFiles/edit_cache.dir

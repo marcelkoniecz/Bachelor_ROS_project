@@ -405,6 +405,56 @@ clean: gtest/googlemock/gtest/CMakeFiles/gtest.dir/clean
 .PHONY : clean
 
 #=============================================================================
+# Directory level rules for directory dataHandle
+
+# Convenience name for "all" pass in the directory.
+dataHandle/all:
+
+.PHONY : dataHandle/all
+
+# Convenience name for "clean" pass in the directory.
+dataHandle/clean: dataHandle/CMakeFiles/_catkin_empty_exported_target.dir/clean
+
+.PHONY : dataHandle/clean
+
+# Convenience name for "preinstall" pass in the directory.
+dataHandle/preinstall:
+
+.PHONY : dataHandle/preinstall
+
+#=============================================================================
+# Target rules for target dataHandle/CMakeFiles/_catkin_empty_exported_target.dir
+
+# All Build rule for target.
+dataHandle/CMakeFiles/_catkin_empty_exported_target.dir/all:
+	$(MAKE) -f dataHandle/CMakeFiles/_catkin_empty_exported_target.dir/build.make dataHandle/CMakeFiles/_catkin_empty_exported_target.dir/depend
+	$(MAKE) -f dataHandle/CMakeFiles/_catkin_empty_exported_target.dir/build.make dataHandle/CMakeFiles/_catkin_empty_exported_target.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/marcel/inz_ws/build/CMakeFiles --progress-num= "Built target _catkin_empty_exported_target"
+.PHONY : dataHandle/CMakeFiles/_catkin_empty_exported_target.dir/all
+
+# Build rule for subdir invocation for target.
+dataHandle/CMakeFiles/_catkin_empty_exported_target.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/marcel/inz_ws/build/CMakeFiles 0
+	$(MAKE) -f CMakeFiles/Makefile2 dataHandle/CMakeFiles/_catkin_empty_exported_target.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/marcel/inz_ws/build/CMakeFiles 0
+.PHONY : dataHandle/CMakeFiles/_catkin_empty_exported_target.dir/rule
+
+# Convenience name for target.
+_catkin_empty_exported_target: dataHandle/CMakeFiles/_catkin_empty_exported_target.dir/rule
+
+.PHONY : _catkin_empty_exported_target
+
+# clean rule for target.
+dataHandle/CMakeFiles/_catkin_empty_exported_target.dir/clean:
+	$(MAKE) -f dataHandle/CMakeFiles/_catkin_empty_exported_target.dir/build.make dataHandle/CMakeFiles/_catkin_empty_exported_target.dir/clean
+.PHONY : dataHandle/CMakeFiles/_catkin_empty_exported_target.dir/clean
+
+# clean rule for target.
+clean: dataHandle/CMakeFiles/_catkin_empty_exported_target.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
 # Directory level rules for directory simulation
 
 # Convenience name for "all" pass in the directory.

@@ -9,6 +9,7 @@
     <arg name="debug"  default="false"/>
 
     <include file="$(find gazebo_ros)/launch/willowgarage_world.launch">
+    
         <!-- <arg name="world_name" value="$find simulation/worlds/willow.world"/>
         <arg name="paused" value="$(arg paused)"/>
         <arg name="use_sim_time" value="$(arg use_sim_time)"/>
@@ -20,7 +21,7 @@
     <param name="myRobotDescription" command= "$(find xacro)/xacro '$(find simulation)/models/robot/myrobot.xacro'"/>
    
     <node name="myRobotSpawn" pkg="gazebo_ros" type="spawn_model" output="screen"
-         args="-urdf -param myRobotDescription -model diff_drive" />
+         args="-urdf -param myRobotDescription -model diff_drive " />
 
     <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
         <remap from="robot_description" to="myRobotDescription"/>

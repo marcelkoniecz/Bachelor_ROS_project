@@ -725,6 +725,18 @@ catkin_DIR:PATH=/opt/ros/melodic/share/catkin/cmake
 //The directory containing a CMake configuration file for cpp_common.
 cpp_common_DIR:PATH=/opt/ros/melodic/share/cpp_common/cmake
 
+//Value Computed by CMake
+dataHandle_BINARY_DIR:STATIC=/home/marcel/inz_ws/build/dataHandle
+
+//Value Computed by CMake
+dataHandle_SOURCE_DIR:STATIC=/home/marcel/inz_ws/src/dataHandle
+
+//Value Computed by CMake
+data_handle_BINARY_DIR:STATIC=/home/marcel/inz_ws/build/dataHandle
+
+//Value Computed by CMake
+data_handle_SOURCE_DIR:STATIC=/home/marcel/inz_ws/src/dataHandle
+
 //The directory containing a CMake configuration file for dynamic_reconfigure.
 dynamic_reconfigure_DIR:PATH=/opt/ros/melodic/share/dynamic_reconfigure/cmake
 
@@ -1239,7 +1251,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=5
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=6
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

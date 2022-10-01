@@ -1,0 +1,8 @@
+prefix=/home/marcel/inz_ws/devel
+
+Name: data_handle
+Description: Description of data_handle
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

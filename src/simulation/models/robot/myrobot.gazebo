@@ -8,14 +8,16 @@
       <updateRate>20</updateRate>
       <leftJoint>jointLeftWheel</leftJoint>
       <rightJoint>jointRightWheel</rightJoint>
-      <wheelSeparation>0.1</wheelSeparation>
-      <wheelDiameter>0.16</wheelDiameter>
-      <wheelTorque>1</wheelTorque>
+      <wheelSeparation>0.225</wheelSeparation>
+      <wheelDiameter>0.2</wheelDiameter>
+      <wheelTorque>10</wheelTorque>
       <commandTopic>cmd_vel</commandTopic>
       <odometryTopic>odom</odometryTopic>
       <odometryFrame>odom_link</odometryFrame>
-      <robotBaseFrame>chassisLink</robotBaseFrame>
-      <legacyMode>true</legacyMode>
+      <robotBaseFrame>dummyLink</robotBaseFrame>
+      <legacyMode>false</legacyMode>
+      <publishWheelTF>true</publishWheelTF>
+      <publishWheelJointState>true</publishWheelJointState>
     </plugin>
   </gazebo>
 
@@ -25,4 +27,38 @@
         </plugin>
     </gazebo>
 
+<!-- hokuyo -->
+  <gazebo reference="laser_link">
+    <sensor type="gpu_ray" name="head_hokuyo_sensor">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>true</visualize>
+      <update_rate>20</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>720</samples>
+            <resolution>1</resolution>
+            <min_angle>-1.570796</min_angle>
+            <max_angle>1.570796</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.10</min>
+          <max>30.0</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+
+          <!-- <mean>0.0</mean>
+          <stddev>0.01</stddev> -->
+        </noise>
+      </ray>
+      <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_gpu_laser.so">
+        <topicName>/robot/laser</topicName>
+        <frameName>/laser_link</frameName>
+      </plugin>
+    </sensor> -->
+
+   </gazebo>
 </robot>

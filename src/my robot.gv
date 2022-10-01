@@ -1,0 +1,20 @@
+digraph G {
+node [shape=box];
+"dummyLink" [label="dummyLink"];
+"chassisLink" [label="chassisLink"];
+"laser_link" [label="laser_link"];
+"casterLink" [label="casterLink"];
+"leftWheelLink" [label="leftWheelLink"];
+"rightWheelLink" [label="rightWheelLink"];
+node [shape=ellipse, color=blue, fontcolor=blue];
+"dummyLink" -> "baseLinktochassis" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"baseLinktochassis" -> "chassisLink"
+"dummyLink" -> "hokuyo_joint" [label="xyz: 0.17 0 0.03 \nrpy: 0 -0 0"]
+"hokuyo_joint" -> "laser_link"
+"dummyLink" -> "jointCaster" [label="xyz: -0.43 0 -0.05 \nrpy: 0 -0 0"]
+"jointCaster" -> "casterLink"
+"dummyLink" -> "jointLeftWheel" [label="xyz: 0.08 0.125 0 \nrpy: 0 -0 0"]
+"jointLeftWheel" -> "leftWheelLink"
+"dummyLink" -> "jointRightWheel" [label="xyz: 0.08 -0.125 0 \nrpy: 0 -0 0"]
+"jointRightWheel" -> "rightWheelLink"
+}

@@ -3,69 +3,81 @@
   <xacro:include filename="$(find simulation)/models/robot/myrobot.gazebo" />
    
    
+   <link name ='dummyLink'>
+        <pose> 0 0 0 0 0 0 </pose>
+   </link>
+
+
+
     <link name = 'chassisLink'>
         <pose> 0 0 0 0 0 0 </pose>
        <inertial> 
           <mass value = "3"/>
-          <inertia ixx="0.010625" ixy="0" ixz="0" iyy="0.040625" iyz="0" izz="0.130625"/>
+          <inertia ixx="0.012500000000000002" ixy="0" ixz="0" iyy="0.04250000000000001" iyz="0" izz=" 0.05000000000000001"/>
         </inertial>
 
         <collision name ='collisionChassis'>
             <origin rpy="0 0 0" xyz ="0 0 0"/>
             <geometry>
-                <box size ="0.35 0.2 0.05"/>
+                <box size ="0.4 0.2 0.1"/>
             </geometry>
         </collision>
         <visual name='baseLinkVisual'>
             <origin rpy="0 0 0" xyz ="0 0 0"/>    
                 <geometry>
-                    <box size ="0.35 0.2 0.05"/>
+                    <box size ="0.4 0.2 0.1"/>
                 </geometry>
             <material name="orange"/>
         </visual>
     </link>
+    <joint name="baseLinktochassis" type="fixed">
+        <child link="chassisLink"/>
+        <parent link="dummyLink"/>
+    </joint> 
 
     <link name="casterLink">
     <inertial>
-        <mass value="0.1"/>
+        <mass value="0.001"/>
         <origin rpy="0 0 0" xyz="0 0 0"/>
-        <inertia ixx="0.000395416666667" ixy="0" ixz="0" iyy="0.106208333" iyz="0" izz="0.106208333"/>
+        <inertia ixx=" 1.9600000000000003e-06" ixy="0" ixz="0" iyy=" 1.9600000000000003e-06" iyz="0" izz=" 1.9600000000000003e-06"/>
     </inertial>
         <collision name ='collisionCaster'>
-            <origin rpy="0 0 0" xyz="0.3 0 0.025"/>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
-                <sphere radius="0.05"/>
+                <sphere radius="0.07"/>
             </geometry>
             <surface>
                 <friction>
                     <ode>
                         <mu>0</mu>
                         <mu2>0</mu2>
-                        <slip1>1.0</slip1>
-                        <slip2>1.0</slip2>
+                        <slip1>1</slip1>
+                        <slip2>1</slip2>
                     </ode>
                 </friction>
             </surface>
         </collision>
         <visual>
-            <origin rpy="0 0 0" xyz="0.3 0 0.025"/> 
+            <origin rpy="0 0 0" xyz="0 0 0"/>
             <geometry>
-                <sphere radius="0.05"/>
+                <sphere radius="0.07"/>
             </geometry>
         </visual>
     </link>
 
-    <joint name="jointCaster" type="fixed">
-        <origin rpy="0 0 0" xyz="-0.2 0 -0.05"/>
+
+    <joint name="jointCaster" type="continuous">
+        <origin rpy="0 0 0" xyz="-0.13 0 -0.03"/>
         <child link="casterLink"/>
-        <parent link="chassisLink"/>
+        <parent link="dummyLink"/>
     </joint>
+
 
     <link name="leftWheelLink">
         <collision name="collisionLeftWheel">
             <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
             <geometry>
-                <cylinder radius="0.08" length="0.05"/>
+                <cylinder radius="0.1" length="0.05"/>
             </geometry>
             <surface>
                 <friction>
@@ -81,20 +93,20 @@
         <visual>
             <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
             <geometry>
-                <cylinder radius="0.08" length="0.05"/>
+                <cylinder radius="0.1" length="0.05"/>
             </geometry>
         </visual>
         <inertial>
             <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
              <mass value="0.2"/>
-             <inertia ixx="0.000361667" ixy="0" ixz="0" iyy="0.000361667" iyz="0" izz="0.00025"/>
+             <inertia ixx=" 0.0005416666666666668" ixy="0" ixz="0" iyy=" 0.0005416666666666668" iyz="0" izz="0.0010000000000000002"/>
         </inertial>
     </link>
 
     <joint name="jointLeftWheel" type="continuous">
-        <origin rpy="0 0 0" xyz="-0.08 0.125 0"/>
+        <origin rpy="0 0 0" xyz="0.08 0.125 0"/>
         <child link="leftWheelLink"/>
-        <parent link="chassisLink"/>
+        <parent link="dummyLink"/>
         <axis rpy="0 0 0" xyz="0 1 0"/>
         <limit effort="50" velocity="50"/>
         <joint_properties damping="0" friction="0"/>
@@ -105,7 +117,7 @@
         <collision name="collisionRightWheel">
             <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
             <geometry>
-                <cylinder radius="0.08" length="0.05"/>
+                <cylinder radius="0.1" length="0.05"/>
             </geometry>
             <surface>
                 <friction>
@@ -121,23 +133,51 @@
         <visual>
             <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
             <geometry>
-                <cylinder radius="0.08" length="0.05"/>
+                <cylinder radius="0.1" length="0.05"/>
             </geometry>
         </visual>
         <inertial>
             <origin xyz="0 0 0" rpy="0 1.5707 1.5707"/>
              <mass value="0.2"/>
-             <inertia ixx="0.000361667" ixy="0" ixz="0" iyy="0.000361667" iyz="0" izz="0.00025"/>
+             <inertia ixx=" 0.0005416666666666668" ixy="0" ixz="0" iyy=" 0.0005416666666666668" iyz="0" izz="0.0010000000000000002"/>
         </inertial>
     </link>
 
     <joint name="jointRightWheel" type="continuous">
-        <origin rpy="0 0 0" xyz="-0.08 -0.125 0"/>
+        <origin rpy="0 0 0" xyz="0.08 -0.125 0"/>
         <child link="rightWheelLink"/>
-        <parent link="chassisLink"/>
+        <parent link="dummyLink"/>
         <axis rpy="0 0 0" xyz="0 1 0"/>
         <limit effort="50" velocity="50"/>
         <joint_properties damping="0" friction="0"/>
     </joint>
 
-</robot>
+
+    <link name= "laser_link">
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.01 0.05 0.01"/>
+            </geometry>
+        </collision>
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.02 0.05 0.02"/>
+            </geometry>
+        </visual>
+        <inertial>
+            <mass value="0.01" />
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <inertia ixx=" 2.4166666666666675e-06" ixy="0" ixz="0" iyy=" 6.666666666666667e-07" iyz="0" izz="2.4166666666666675e-06" />
+        </inertial>
+    </link>
+
+    <joint name="hokuyo_joint" type="fixed">
+        <origin xyz="0.17 0 0.06" rpy="0 0 0"/>
+        <child link="laser_link"/>
+        <parent link="dummyLink"/>
+        <axis rpy="0 0 0" xyz="0 0 0"/>
+    </joint>
+
+</robot>    

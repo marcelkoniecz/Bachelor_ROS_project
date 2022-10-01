@@ -1,0 +1,8 @@
+prefix=/home/marcel/inz_ws/devel
+
+Name: dataHandle
+Description: Description of dataHandle
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
