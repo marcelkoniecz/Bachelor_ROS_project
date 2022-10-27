@@ -1,0 +1,383 @@
+% Szablon pracy inżynierskiej/magisterskiej
+% Autor: Wojciech Domski <wojciech.domski@pwr.edu.pl>
+%
+% Oryginalna wersja rozwijana przez dra inż. Adama Ratajczaka
+%
+% Lista zmian:
+% * 2022.06.28 Dodanie uwag i wskazówek.
+% * 2022.03.14 Zmiana kodu jednostki
+% * 2022.03.14 Wykorzystanie nowej klasy mgr.cls dla W12N
+% * Uproszczenie szablonu oraz uzupełnienie wymaganych
+% informacji
+
+%Przykładowy plik ułatwiający złożenie projektu dyplomowego inżynierskiego.
+%UWAGA: Generowany napis na stronie tytułowej o treści PROJEKT DYPLOMOWY INŻYNIERSKI został zaproponowany przeze mnie i nie jest, póki co, potwierdzony przez władze wydziału. Przed ostatecznym oddaniem tak złożonej pracy należy upewnić się jaka powinna być treść tego napisu. W momencie gdy uzyskam informację na temat treści tego napisu, dokonam niezbędnych zmian w źródłach.
+
+\documentclass[eng,printmode]{mgr}
+%opcje klasy dokumentu mgr.cls zostały opisane w dołączonej instrukcji
+
+%poniżej deklaracje użycia pakietów, usunąć to co jest niepotrzebne
+\usepackage{polski} %przydatne podczas składania dokumentów w j. polskim
+%\usepackage[polish]{babel}%alternatywnie do pakietu polski, wybrać jeden z nich
+\usepackage[utf8]{inputenc} %kodowanie znaków, zależne od systemu
+\usepackage[T1]{fontenc} %poprawne składanie polskich czcionek
+
+%pakiety do grafiki
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{psfrag}
+
+%pakiety dodające dużo dodatkowych poleceń matematycznych
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+%pakiety wspomagające i poprawiające składanie tabel
+\usepackage{supertabular}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{hhline}
+
+%różne pakiety
+\usepackage{hyperref} % linki
+
+%pakiet wypisujący na marginesie etykiety równań i rysunków zdefiniowanych przez \label{}, chcąc wygenerować finalną wersję dokumentu wystarczy usunąć poniższą linię
+\usepackage{showlabels}
+
+%definicje własnych poleceń
+\newcommand{\R}{I\!\!R} %symbol liczb rzeczywistych, działa tylko w trybie matematycznym
+\newtheorem{theorem}{Twierdzenie}[section] %nowe otoczenie do składania twierdzeń
+
+%dane do złożenia strony tytułowej
+\title{Budowanie map otoczenia dla robota mobilnego w środowisku ROS}
+\engtitle{English title}
+\author{Marcel Konieczny}
+\supervisor{dr inż. Wojciech Domski, K29W12ND02}
+
+%\date{2008} %standardowo u dołu strony tytułowej umieszczany jest bieżący rok, to polecenie pozwala wstawić dowolny rok
+
+%poniżej jest lista kierunków i specjalności na wydziale elektroniki, należy wybrać właściwe lub dopisać jeśli nie ma odpowiednich
+\field{Automatyka i Robotyka (AIR)}
+\specialisation{Robotyka (ARR)}
+
+%tutaj zaczyna się właściwa treść dokumentu
+\begin{document}
+    \bibliographystyle{plabbrv} %tylko gdy używamy BibTeXa, ustawia polski styl bibliografii
+
+    \maketitle %polecenie generujące stronę tytułową
+    \dedication{6cm}{To jest przykładowa treść opcjonalnej dedykacji, należy ją zmienić lub usunąć w całości polecenie \texttt{$\backslash$dedication}}
+
+    \tableofcontents %spis treści
+
+%poniżej znajduje się przykładowa treść dalszej części dokumentu, zainteresowanych zachęcam do rozszyfrowania frazy "Lorem ipsum" :)
+    \chapter{Wstęp}
+
+    Dokument ten zawiera wytyczne dotyczące pisania pracy dyplomowej.
+
+    Dokument pracy dyplomowej powinien być rozwijany w systemie składania
+    tekstu LaTeX.
+    Zbiorczą paczkę instalacyjną na system Windows wraz z edytorem można
+    znaleźć pod adresem
+    \url{https://www.tug.org/protext/}
+    zwiera ona wszystkie niezbędne narzędzia do wytwarzania dokumentu pracy
+    dyplomowej
+    w formacie pliku PDF.
+
+    Jako szablon dokumentu należy wykorzystać klasę mgr.cls przygotowaną przez
+    dr. inż. Adama Ratajczaka. Szablon dokumentu znajduje się w pliku
+    \texttt{dyplom-inz-utf8-dos$\_$szablon.tex} (ten dokument).
+
+    Praca powinna być rozwijana w webowym edytorze plików latexowych
+    \url{https://www.overleaf.com}.
+    Proszę o wysłanie zaproszenia do tego systemu w celu nanoszenia
+    poprawek i komentarzy do Państwa prac dyplomowych.
+
+    \section{Teza}
+    \label{sec:Teza}
+
+    Tutaj należy umieścić tezę pracy. Powinno być to jedno zdanie, które
+    \textbf{bardzo} zwięźle ujmuje całą pracę. Do samej tezy należy
+    odnieść się w samym podsumowaniu i pokazać, że w toku pracy została
+    ona zrealizowana.
+
+
+    \chapter{Konfiguracja środowiska symulacyjnego}
+
+    \chapter{Przetwarzanie danych}
+    \section{Przetwarzanie danych miernika laserowego}
+    \section{Klasteryzacja danych}
+
+    \chapter{Budowanie mapy otoczenia}
+
+
+    \chapter{Podsumowanie}
+
+
+
+\end{document}
+\chapter{Elementy pracy}
+
+Każdy rozdział powinien mieć w tym miejscu
+element składający się z tekstu, któ\ref{eq:pitagoras}y np. będzie
+wprowadzeniem do tego rozdziału. Zatem, w poniższym
+rozdziale zostały opisane najczęściej występujące elementy
+dokumentu i sposób ich właściwego wykorzystania.
+
+\section{Ogólne uwagi}
+
+
+\textbf{Praca powinna być pisana bezosobowo i w czasie przeszłym.}
+
+Do własnej osoby należy odwoływać się jako "autor". Praca dyplomowa
+jest pisana w czasie przeszłym ponieważ jest to efekt Państw pracy,
+a nie plan, który należy dopiero wykonać.
+
+Proszę unikać również trzeciej osoby liczby mnogiej, np.:
+Wybraliśmy zestaw czujników .... -> Wybrano zestaw czujników.
+
+Praca dyplomowa jak każda praca powinna zawierać wstęp,
+rozwinięcie i zakończenie. Sam wstęp powinien być pisany według zasady ,,od ogółu do szczegółu''.
+Najpierw należy wyjść od ogólnych sformułowań, a następnie stopniowo przejść
+do problemu opisanego w pracy.
+
+We wstępie należy określić czego będzie dotyczyć praca, obszerność tej
+części
+to co najmniej 4 strony. Należy również odnieść się do istniejących
+rozwiązań,
+tak aby usytuować Państwa pracę. W przypadku pracy dyplomowej, gdzie
+znajduje się aspekt badawczy należy przedstawić tezę pracy -- jedno lub dwa
+zdania, które w sposób syntetyczny przedstawia problem badawczy.
+W zależności od problematyki, którą się
+Państwo zajmujecie rozwinięcie może przybrać różny kształt.
+Jednak powinno być ono przedstawione w sposób logiczny i spójny.
+
+Przykładowo w pracy można znaleźć sformułowanie:
+
+,,Jednym z problemów napotkanych w trakcie realizacji pracy była obsługa wyświetlacza.
+Wyświetlacz o rozdzielczości 320x240 pikseli i 16-bitowej głębi kolorów wymaga bufora
+ramki o rozmiarze 153.6kB. Cała pamięć RAM mikrokontrolera ma pojemność
+zaledwie 128kB. Modyfikacje obrazu są więc zapisywane bezpośrednio do pamięci GRAM
+wyświetlacza, co jednak spowalnia działanie programu i utrudnia wprowadzanie zmian.''
+
+Zamienione w
+,,Jednym z możliwych usprawnień jest poprawienie komfortu korzystania z wyświetlacza.
+Celem uzyskania wyższej częstotliwości odświeżania wyświetlanego obrazu na
+ekranie LCD należałoby wykorzystać inny mikrokontroler oferujący większą ilość
+pamięci RAM. Taki zabieg pozwoliłby na buforowanie rysowanego obrazu, a
+tym samym przyspieszenie jego wysyłania na ekran.''
+
+Unikać nacechowania. Nie należy pisać pracy, gdzie
+będą wykorzystywane kolokwializmy, albo nadmierne nacechowania.
+Praca powinna przedstawiać fakty, a nie oddawać
+osobiste poglądy autora.
+
+W pracy należy przedstawić fakty, ale nie suche fakty.
+Nie powinna być to dokumentacja techniczna. Fakty należy połączyć
+ze sobą w ogólne wnioski.
+
+Przykład:
+Zastosowano dodatkowy ekran do kabla łączącego dwa moduły
+ze sobą, bo czasem powstawały błędy w komunikacji.
+
+Zdanie powinno wyglądać tak:
+Zdecydowano się na zastosowanie dodatkowego ekranu
+dla przewodu łączącego dwa moduły systemu, ponieważ
+występowały błędy w komunikacji. Takie działanie
+pozwoliło podnieść liczbę poprawnie przesyłanych
+ramek danych za pośrednictwem łącza.
+
+\begin{itemize}
+    \item
+    nie ma potocznych określeń: kabel,
+    \item
+    nie ma niepotrzebnych i nieprecyzyjnych
+    określeń: dodatkowy, czasem,
+    \item
+    formalny język: nie ma ,,bo'',
+    \item
+    drugie zdanie prezentuje wymierny skutek
+    zastosowanego działania.
+\end{itemize}
+
+
+\section{Rysunki i inne materiały}
+
+Jeśli wykorzystujecie Państwo rysunki, które nie są Państwa własnością,
+a pochodzą np. z książki należy w podpisie podać cytowanie.
+To samo dotyczy wzorów i formuł matematycznych, konceptów, itd.
+Na końcu podpisu nie wstawiamy kropki.
+
+Zdjęcia/rysunki w pracy nie powinny mieć większego rozmiaru niż 150kB.
+Jeżeli jest to możliwe rysunki powinny być w formacie wektorowym
+(np. diagramy, schematy, itp.).
+
+\section{Równania}
+
+Odwołania do równań umieszczamy w nawiasach okrągłych.
+Równanie traktujemy jako część zdania, czyli należy na
+końcu postawić kropkę, bądź przecinek jeśli wymieniamy
+nazwy zmiennych, które zostały użyte pierwszy raz. na przykład:
+
+\begin{equation}
+    \label{eq:pitagoras}
+    a^2 + b^2 = c^2,
+\end{equation}
+gdzie $a$ to ... Należy zwrócić uwagę na przecinek po równaniu.
+Równanie jest traktowane jako zdanie, które możemy kontynuować
+w tekście pracy.
+
+Aby odwołać się do równania należy od razu podać jego referencję.
+W (\ref{eq:pitagoras}) przedstawiono przykładowa równanie.
+Proszę unikać bezpośredniego wykorzystania słowa ,,równanie'', np.
+w równaniu (\ref{eq:pitagoras}) widzimy wzór.
+
+\section{Listy i wypunktowania}
+
+Każde wypunktowania rozpoczyna się od małej litery, a kończy przecinkiem
+oprócz ostatniego elementu, np. to jest wypunktowanie:
+\begin{itemize}
+    \item
+    pozycja 1,
+    \item
+    pozycja 2,
+    \item
+    długa pozycja 3. Jeszcze dodatkowy opis,
+    \item
+    ostatnia pozycja.
+\end{itemize}
+
+W przypadku listy mamy:
+\begin{enumerate}
+    \item
+    Pierwszy punkt.
+    \item
+    Drugi punkt.
+    \item
+    Ostatni punkt.
+\end{enumerate}
+
+\section{Myślnik}
+
+W Latexu występują 3 rodzaje poziomych kresek: -, --, ---.
+Pojedyncza kreska występuje przy automatycznym łamaniu wyrazów celem
+jego przeniesienia do nowej linii.
+Podwójna kreska pełni rolę myślnika.
+Potrójna kreska zaznacza np. wypowiedź bohatera (dialogi w książkach
+fabularnych).
+
+\section{Odmiany obcojęzycznych nazwisk}
+
+W przypadku, gdy odmienione nazwisko np. w języku angielskim
+brzmi dobrze (jego wymowa nie jest łamana) to nie łączymy
+nazwiska z końcówką poprzez apostrof.
+
+Przykładowo:
+Filtr Madgwicka, NIE Filtr Madgwick'a
+Filtr Mahony'ego, NIE Filtr Mahonyego, NIE Filtr Mahoniego
+
+\section{Odwołania}
+
+W przypadku umieszczenia w pracy rysunków, tabel, fragmentów
+kodu programów należy wykorzystywać odwołania do tych elementów.
+Jeśli w treści pracy nie ma odwołania do np. rysunku, to
+oznacza, że nie powinien się tam znaleźć i jest zbędny.
+
+\section{Wdowy, bękarty, szewcy i sieroty}
+
+W pracy należy unikać tego typu pozostałości, czy innych niedociągnięć.
+Unikanie tego typu elementów pracy sprawi, że będzie ona wyglądałoa
+dużo estetyczniej. W przypatku sierot problem można rozwiązać
+wykorzystując tzw. twardą spację (tylda)
+pomiędzy dwoma wyrazami i~cieszyć się efektem.
+
+\chapter{Literatura}
+
+Należy unikać bezpośredniego odwołania do bibliografii.
+
+Książka \cite{SR01} opowiada o ...
+
+Należy wykorzystać jednak odwołanie do pozycji w następującej
+postaci.
+
+Do wytwarzania oprogramowania dla mikrokontrolerów
+można wykorzystać dedykowane oprogramowanie \cite{SR01}.
+
+W pracach dyplomowych najczęściej pojawiają się odniesienia do książek,
+artykułów naukowych, materiałów konferencyjnych oraz materiałów internetowych.
+W przypadku tego ostatniego należy podać adres URL oraz datę ostatniego dostępu.
+Proszę nie cytować Wikipedii, filmów na serwisach streamingowych (np. youtube).
+Poniżej lista elementów, które powinny się znaleźć w przypadku cytowania
+różnych rodzajów pozycji bibliograficznych:
+
+Przykłady pozycji można znaleźć w pliku \textit{bibliografia.bib}.
+Książka \cite{Kristic95}, artykuł w czasopiśmie \cite{Domski22},
+artykuł konferencyjny \cite{Domski17},
+materiał internetowy \cite{Sojourner},
+inne np. instrukcja laboratoryjna \cite{SR01}.
+
+\chapter{Podsumowanie}
+
+W podsumowaniu należy odnieść się do wyników jakie udało się uzyskać
+w trakcie pracy. Również tutaj jawnie należy się odnieść do tezy,
+pokazać w sposób logiczny, że cel w niej przedstawiony został osiągnięty.
+
+Zatem, podsumowanie powinno składać się z następujących części:
+\begin{enumerate}
+    \item
+    Zdanie o wypełnieniu założeń pracy.
+    \item
+    Następnie kilka lub kilkanaście zdań o projekcie co zostało wykonane.
+    \item
+    Na końcu ewentualne dwa lub trzy problemy (maksymalnie), ta część powinna być
+    dość krótka. Najlepiej podać propozycję rozwiązania.
+    \item
+    Koniec podsumowania powinien zawierać możliwe kierunki dalszego rozwoju.
+    Jeżeli występowały w pracy problemy to proszę przedstawić owe problemy w
+    trakcie pracy jako możliwe kierunki rozwoju, nie opisywać to jako problem
+    i nie oznajmiać, że nie udało się czegoś wykonać.
+\end{enumerate}
+
+\newpage
+\addcontentsline{toc}{chapter}{Załącznik A}
+\appendix
+\thispagestyle{empty}
+
+\chapter*{Załącznik A}
+\label{ch:ZalacznikA}
+
+W pracy, podczas której wytworzyliście Państwo oprogramowanie, modele,
+symulacje należy zawrzeć w pracy specjalny rozdział (dodatek), a
+w nim zawrzeć informację o dołączeniu do pracy płyty CD z odpowiednią
+adnotacją co do jej zawartości.
+
+W pracy powinien pojawić się załącznik znajdujący się po bibliografii
+jako rozdział nienumerowany.
+
+Należy ogólnie opisać co znajduje się na dołączonej płycie CD.
+Powinna to być lista (lub środowisko description).
+
+Np.
+
+Do pracy załączono płytę DVD zawierającą w~poszczególnych katalogach:
+
+\begin{description}
+    \item
+    \texttt{/Praca$\_$inzynierska.pdf} –- wersja cyfrowa pracy,
+    \item
+    \texttt{/Kod$\_$zrodlowy} –- kod źródłowy oprogramowania do ...,
+    \item
+    \texttt{/PCB.zip} -- projekt płytki PCB,
+    \item
+    \texttt{/Czesci$\_$mechaniczne.zip} -- archiwum z częściami mechanicznymi wykorzystanymi
+    w projekcie.
+
+\end{description}
+
+
+\addcontentsline{toc}{chapter}{Bibilografia} %utworzenie w spisie treści pozycji Bibliografia
+\bibliography{bibliografia} % wstawia bibliografię korzystając z pliku bibliografia.bib - dotyczy BibTeXa, jeżeli nie korzystamy z BibTeXa należy użyć otoczenia thebibliography
+
+%opcjonalnie może się tu pojawić spis rysunków i tabel
+% \listoffigures
+% \listoftables
+\end{document}
+

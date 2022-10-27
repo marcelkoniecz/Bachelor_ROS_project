@@ -5,7 +5,7 @@
     <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
 
       <alwaysOn>true</alwaysOn>
-      <updateRate>20</updateRate>
+      <updateRate>10</updateRate>
       <leftJoint>jointLeftWheel</leftJoint>
       <rightJoint>jointRightWheel</rightJoint>
       <wheelSeparation>0.225</wheelSeparation>
@@ -32,14 +32,14 @@
     <sensor type="gpu_ray" name="head_hokuyo_sensor">
       <pose>0 0 0 0 0 0</pose>
       <visualize>true</visualize>
-      <update_rate>20</update_rate>
+      <update_rate>10</update_rate>
       <ray>
         <scan>
           <horizontal>
-            <samples>720</samples>
+            <samples>360</samples>
             <resolution>1</resolution>
-            <min_angle>-1.570796</min_angle>
-            <max_angle>1.570796</max_angle>
+            <min_angle>-3.14159265359</min_angle>
+            <max_angle>3.14159265359</max_angle>
           </horizontal>
         </scan>
         <range>

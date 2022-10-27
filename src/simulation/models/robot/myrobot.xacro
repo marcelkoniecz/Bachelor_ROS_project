@@ -152,31 +152,57 @@
         <joint_properties damping="0" friction="0"/>
     </joint>
 
+    <link name ="laserBaseLink">
+        <pose> 0 0 0 0 0 0 </pose>
+        <inertial>
+            <mass value = "1"/>
+            <inertia ixx="0.012500000000000002" ixy="0" ixz="0" iyy="0.04250000000000001" iyz="0" izz=" 0.05000000000000001"/>
+        </inertial>
+        <collision name ='collisionLaserBase'>
+            <origin rpy="0 0 0" xyz ="0 0 0"/>
+            <geometry>
+                <box size ="0.1 0.1 0.05"/>
+            </geometry>
+        </collision>
+        <visual name='baseLinkVisual'>
+            <origin rpy="0 0 0" xyz ="0 0 0"/>
+            <geometry>
+                <box size ="0.1 0.1 0.05"/>
+            </geometry>
+            <material name="orange"/>
+        </visual>
+    </link>
+
+    <joint name="baseLinktochassisLaser" type="fixed">
+        <origin rpy="0 0 0" xyz="0 0 0.06"/>
+        <child link="laserBaseLink"/>
+        <parent link="chassisLink"/>
+    </joint>
 
     <link name= "laser_link">
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <box size="0.01 0.05 0.01"/>
+                <cylinder radius="0.045" length="0.05"/>
             </geometry>
         </collision>
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <box size="0.02 0.05 0.02"/>
+                <cylinder radius="0.045" length="0.05"/>
             </geometry>
         </visual>
         <inertial>
-            <mass value="0.01" />
+            <mass value="1" />
             <origin xyz="0 0 0" rpy="0 0 0"/>
-            <inertia ixx=" 2.4166666666666675e-06" ixy="0" ixz="0" iyy=" 6.666666666666667e-07" iyz="0" izz="2.4166666666666675e-06" />
+            <inertia ixx=" 0.0010416666666666669" ixy="0" ixz="0" iyy="0.0010416666666666669" iyz="0" izz="0.001666666666666667" />
         </inertial>
     </link>
 
     <joint name="hokuyo_joint" type="fixed">
-        <origin xyz="0.17 0 0.06" rpy="0 0 0"/>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
         <child link="laser_link"/>
-        <parent link="dummyLink"/>
+        <parent link="laserBaseLink"/>
         <axis rpy="0 0 0" xyz="0 0 0"/>
     </joint>
 
