@@ -10,7 +10,7 @@ class ScanerHandler(object):
     def __init__(self):
         self.laser_topic_name = 'robot/laser'
         self.new_data_state = False
-        self.sample_num = 360
+        self.sample_num = 720
         self.min_angle = - 3.14159265359  # - pi/2
         self.max_angle = 3.14159265359   # pi/2
         self.sub = rospy.Subscriber(self.laser_topic_name, LaserScan, self.__get_new_data)
