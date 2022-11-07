@@ -22,7 +22,7 @@ class OdometryHandler(object):
         self.rob_pos = Point()      # Robot centre position
         self.las_pos = Point()      # Laser position
         self.euler_yaw = 0
-        self.las_dist = 0.17    # Distance between laser and robot centre
+        self.las_dist = 0    # Distance between laser and robot centre
         self.lock = False
 
     def get_state(self):
@@ -67,11 +67,13 @@ class OdometryHandler(object):
         self.odomdata = msg
         self.rob_pos = msg.pose.pose.position
         self.euler_yaw = calculate_yaw(msg)
-        x= msg.pose.pose.position.x
-        y= msg.pose.pose.position.y
+        self.las_pos.x = msg.pose.pose.position.x
+        self.las_pos.y = msg.pose.pose.position.y
+        # x= msg.pose.pose.position.x
+        # y= msg.pose.pose.position.y
         # inital laser position is (0.17,0) -> in equation we skip  multiplication by y
-        self.las_pos.x = msg.pose.pose.position.x + math.cos(self.euler_yaw) * self.las_dist
-        self.las_pos.y = msg.pose.pose.position.y + math.sin(self.euler_yaw) * self.las_dist
+        # self.las_pos.x = msg.pose.pose.position.x + math.cos(self.euler_yaw) * self.las_dist
+        # self.las_pos.y = msg.pose.pose.position.y + math.sin(self.euler_yaw) * self.las_dist
         self.lock = False
         # print("rob x "+str(x)+" y "+str(y))
         # print("las x "+str(self.las_pos.x) + " y " + str(self.las_pos.y))
