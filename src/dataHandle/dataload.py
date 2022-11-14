@@ -101,13 +101,18 @@ class GridCell:
 class Robot(object):
 
     def __init__(self):
-        self.odometry = OdometryHandler()
+        # self.odometry = OdometryHandler()
         self.scaner = ScanerHandler()
         self.robot_pos = Point()
-        self.pub = rospy.Publisher('points', PointStamped, queue_size=0)
+        # self.pub = rospy.Publisher('points', PointStamped, queue_size=0)
         self.cells_list = []
         self.grid_size = 0.5  # in m
+        self.yaw = 0
 
+    # def callback_save_pos(self):
+    #     self.yaw = self.odometry.get_yaw()
+    #     self.robot_pos = self.odometry.get_las_pos()
+    #     print("call")
 
     def check_new_data(self):
         if self.scaner.get_state():
@@ -116,13 +121,13 @@ class Robot(object):
         #     self.odometry.get_data()
 
     def handle_laser_data(self, laser_data):
-        las_pos = self.odometry.get_las_pos()
-        yaw = self.odometry.get_yaw()
+        self.robot_pos = self.scaner.get_las_pos()
+        self.yaw = self.scaner.get_yaw()
 
         sample = self.scaner.sample_num
         min_ang = self.scaner.min_angle
         max_ang = self.scaner.max_angle
-        print(yaw)
+        # print(yaw)
         cur_ang = min_ang
         resolution = math.pi*2/sample
 
@@ -135,8 +140,11 @@ class Robot(object):
 
             x1 = math.cos(cur_ang) * cur_point
             y1 = math.sin(cur_ang) * cur_point
-            x = math.cos(yaw) * x1 - math.sin(yaw) * y1 + las_pos.x
-            y = math.sin(yaw) * x1 + math.cos(yaw) * y1 + las_pos.y
+            x = math.cos(self.yaw) * x1 - math.sin(self.yaw) * y1 + self.robot_pos.x
+            y = math.sin(self.yaw) * x1 + math.cos(self.yaw) * y1 + self.robot_pos.y
+
+            # x = math.cos(yaw) * x1 - math.sin(yaw) * y1 + las_pos.x
+            # y = math.sin(yaw) * x1 + math.cos(yaw) * y1 + las_pos.y
             point = Point()
             point.x = x
             point.y = y
@@ -194,7 +202,7 @@ class Robot(object):
             # ax.add_artist(ell)
             ax.add_artist(ell)
 
-        ell = Ellipse([self.robot_pos.x,self.robot_pos.y], 0.8, 0.5, angle=(self.odometry.get_yaw()* 180 / math.pi), color='blue')
+        ell = Ellipse([self.robot_pos.x,self.robot_pos.y], 0.8, 0.5, angle=(self.yaw* 180 / math.pi), color='blue')
         ax.add_artist(ell)
         plt.show()
         plt.pause(0.00001)
@@ -225,6 +233,9 @@ class Robot(object):
 
         while not rospy.is_shutdown():
             self.check_new_data()
+
+# def callback(x):
+#     x.callback_save_pos()
 
 
 def start_data_handle():

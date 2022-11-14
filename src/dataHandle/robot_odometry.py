@@ -30,16 +30,6 @@ class OdometryHandler(object):
 
     def get_data(self):
         self.new_data_state = False
-        # laser_distance = 0.17
-        # orientation_q = self.odomdata.pose.pose.orientation
-        # orientatation_list = [orientation_q.x, orientation_q.y, orientation_q.z, orientation_q.w]
-        # (roll, pitch, yaw) = euler_from_quaternion(orientatation_list)
-        # print("Robot x " + str(self.odomdata.pose.pose.position.x) + "y " + str(self.odomdata.pose.pose.position.y))
-        # laser_x = self.odomdata.pose.pose.position.x + math.sin(yaw) * laser_distance
-        # laser_y = self.odomdata.pose.pose.position.y + math.cos(yaw) * laser_distance
-        # print("Laser x " + str(laser_x) + "y " + str(laser_y))
-        # print(str(roll)+" "+str(pitch)+" "+str(yaw))
-        # return self.odomdata
 
     def wait(self):
         while self.lock:
