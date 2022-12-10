@@ -53,13 +53,38 @@ class GridCell:
         sumy = 0
         self.point_num += self.points.__len__()
         # print(self.points.__len__())
-        if self.points.__len__() == 0 or self.points.__len__() == 1:
+        if  self.points.__len__() < 3:
             return False
 
         # self.angle = 90
-        if self.first_calculation:
-            s = np.polyfit([x.x for x in self.points], [y.y for y in self.points], 1)
-            self.angle = math.atan(s[0])
+
+        # if self.first_calculation:
+        # ang = (self.points[self.points.__len__()-1].y-self.points[0].y) / \
+        #         (self.points[self.points.__len__()-1].x-self.points[0].x)
+        # self.angle = math.atan(ang)
+        # print("ang 1 = " + str(ang))
+        # s = np.polyfit([x.x for x in self.points], [y.y for y in self.points], 1)
+        # self.angle = math.atan(s[0])
+        # print("ang = " + str(ang)+" s= " + str(s[0]))
+        # print("polifit =" + str(s[0]))
+        x_arr = np.matrix([np.ones(self.points.__len__()),[x.x for x in self.points]])
+        # x_arr_trans = x_arr.transpose()
+        y_arr = np.matrix([y.y for y in self.points])
+        print("ilos" + str(self.points.__len__()) + "2: " + str(x_arr.size))
+        # print()
+        # print(np.linalg.det(np.outer( x_arr, x_arr)))
+        # w_lr =np.linalg.inv((np.outer( x_arr, x_arr)))
+        # w_lr=np.linalg.inv(np.dot(x_arr_trans, x_arr))
+        # try:
+        w_lr = np.dot(np.dot(np.linalg.inv(np.dot(x_arr, x_arr.transpose())),x_arr), y_arr.transpose())
+        self.angle = math.atan(w_lr[1])
+        # print("ang 2 = " + str(self.angle))
+        # w_lr = np.dot(np.dot(np.linalg.inv(np.outer(x_arr, x_arr)),x_arr)
+        # print("ang 2 = " + str(w_lr[1]))
+
+        # except:
+        #     print("error")
+        # print(str(w_lr))
 
         self.avg[0] = 0
         self.avg[1] = 0
@@ -73,7 +98,7 @@ class GridCell:
         self.first_calculation = True
         if self.first_calculation:
             # self.angle = math.atan(s[0])
-            if self.angle > 0.01 or self.angle < -0.01:
+            if self.angle > 0.05 or self.angle < -0.05:
                 for tmp1 in self.points:
                     x = tmp1.x - self.avg[0]
                     y = tmp1.y - self.avg[1]
@@ -102,27 +127,35 @@ class Robot(object):
 
     def __init__(self):
         self.odometry = OdometryHandler()
-        self.scaner = ScanerHandler()
+        self.scaner = ScanerHandler(self.odometry)
         self.robot_pos = Point()
         self.pub = rospy.Publisher('points', PointStamped, queue_size=0)
         self.cells_list = []
         self.grid_size = 0.5  # in m
-
+        self.size = 20
+        self.angular_vel_counter = 1
 
     def check_new_data(self):
-        if self.scaner.get_state():
+        if self.scaner.get_state() and not self.odometry.is_angular_vel():
+            # self.odometry.lock_write()
             self.handle_laser_data(self.scaner.get_data())
 
         #     self.odometry.get_data()
 
     def handle_laser_data(self, laser_data):
-        las_pos = self.odometry.get_las_pos()
+        # if self.odometry.is_angular_vel():
+        #     # self.odometry.unlock()
+        #     return True
+
         yaw = self.odometry.get_yaw()
+        las_pos = self.odometry.get_las_pos()
+        # print(str(self.odometry.las_pos) + " " + str(las_pos))
+        # self.odometry.unlock()
 
         sample = self.scaner.sample_num
         min_ang = self.scaner.min_angle
         max_ang = self.scaner.max_angle
-        print(yaw)
+        # print(yaw)
         cur_ang = min_ang
         resolution = math.pi*2/sample
 
@@ -140,18 +173,32 @@ class Robot(object):
             point = Point()
             point.x = x
             point.y = y
-            # if x == 'inf' or x == '-inf' or y == 'inf' or y =='-inf':
-            #     print("aa")
-            #     continue
+
+            # tmpx = math.fabs(x)
+            # tmpy = math.fabs(y)
+
+            # print(point)
             point_list.append(point)
             cur_ang += resolution
-            # print(point)
             try:
                 pos_grid = self.calculate_mod(point)
 
             except:
-                print("Blad")
+                # print("Blad")
                 continue
+
+            self.size = max(self.size, math.fabs(x)+0.5, math.fabs(y)+0.5)
+            # print(self.size)
+            # if tmpx > self.size or tmpy > self.size:
+            #     if tmpx > tmpy:
+            #         self.size = tmpx
+            #     else:
+            #         self.size = y
+
+            # if x == 'inf' or x == '-inf' or y == 'inf' or y =='-inf':
+            #     print("aa")
+            #     continue
+
             in_list = False
             for m in self.cells_list:
                 if m.grid_pos == pos_grid:
@@ -164,7 +211,11 @@ class Robot(object):
 
         # print(str(self.cells_list.__len__()))
         self.handle_data()
-        self.plot_data()
+        try:
+            self.plot_data()
+
+        except:
+            return
         #
         # try:
         #     self.cells_list[1].print_cell()
@@ -179,26 +230,35 @@ class Robot(object):
         plt.clf()
         fig = plt.figure(0)
         ax = fig.add_subplot(111)
-        ax.set_xlim(-20, 20)
-        ax.set_ylim(-20, 20)
+        # ax.set_xlim(-10, 10)
+        # ax.set_ylim( -10,  10)
+        ax.set_xlabel('Polozenie [m]')
+        ax.set_ylabel('Polozenie [m]')
+        ax.set_title('Mapa otoczenia')
+        #
+        # ax.set_xlim(-self.size, self.size)
+        # ax.set_ylim(-self.size, self.size)
+
+        ax.set_xlim(-10, 10)
+        ax.set_ylim(-10,10)
 
         for cur_cell in self.cells_list:
 
             pos = cur_cell.get_average_position()
             dev = cur_cell.get_standard_deviation()
             # print(dev[0])
-            ell = Ellipse(pos, ((dev[0])*6), ((dev[1])*6), angle=cur_cell.get_angle(), color='red')
+            ell = Ellipse(pos, ((dev[0])*3), ((dev[1])*3), angle=cur_cell.get_angle(), color='red')
             # print(ell)
 
             # ax = fig.add_subplot(111, aspect = 'equal')
             # ax.add_artist(ell)
             ax.add_artist(ell)
 
-        ell = Ellipse([self.robot_pos.x,self.robot_pos.y], 0.8, 0.5, angle=(self.odometry.get_yaw()* 180 / math.pi), color='blue')
+        # ell = Ellipse([self.robot_pos.x,self.robot_pos.y], 0.8, 0.5, angle=(self.odometry.get_yaw()* 180 / math.pi), color='blue')
         ax.add_artist(ell)
         plt.show()
         plt.pause(0.00001)
-        print("tak")
+        # print("tak")
         # plt.plot(ell)
         # plt.show()
         # plt.plot([1,2,3,4])

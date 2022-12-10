@@ -3,11 +3,12 @@
 import rospy
 from sensor_msgs.msg import LaserScan
 # from data_scaner_handler import ScanerHandler
-
+from robot_odometry import OdometryHandler
 
 class ScanerHandler(object):
 
-    def __init__(self):
+    def __init__(self,odomhan):
+        self.odometryhan = odomhan
         self.laser_topic_name = 'robot/laser'
         self.new_data_state = False
         self.sample_num = 720
@@ -24,8 +25,10 @@ class ScanerHandler(object):
         return self.laser_scan.ranges
 
     def __get_new_data(self, msg):
-        self.laser_scan = msg
-        # print(self.laser_scan)
-        self.new_data_state = True
+        if self.odometryhan.is_angular_vel:
+            self.laser_scan = msg
+            self.odometryhan.save_pos()
+            # print("tak")
+            self.new_data_state = True
 
 

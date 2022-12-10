@@ -21,12 +21,30 @@ class OdometryHandler(object):
         self.odomdata = Odometry()
         self.rob_pos = Point()      # Robot centre position
         self.las_pos = Point()      # Laser position
+        self.saved_pos = Point()
+        self.saved_yaw = 0
         self.euler_yaw = 0
         self.las_dist = 0    # Distance between laser and robot centre
         self.lock = False
+        self.angular_speed = True
+        self.lock_during_read = False
 
     def get_state(self):
         return self.new_data_state
+
+    def is_angular_vel(self):
+        # return False
+        return self.angular_speed
+
+    def save_pos(self):
+        self.saved_pos = self.las_pos
+        self.saved_yaw = self.euler_yaw
+
+    def lock_write(self):
+        self.lock_during_read = True
+
+    def unlock(self):
+        self.lock_during_read = False
 
     def get_data(self):
         self.new_data_state = False
@@ -55,13 +73,17 @@ class OdometryHandler(object):
 
     def get_yaw(self):
         self.wait()
-        return self.euler_yaw
+        # return self.euler_yaw
+        return self.saved_yaw
 
     def get_las_pos(self):
         self.wait()
-        return self.las_pos
+        # return self.las_pos
+        return self.saved_pos
 
     def __get_new_data(self, msg):
+        if self.lock_during_read:
+            return
         self.lock = True
         self.new_data_state = True
         self.odomdata = msg
@@ -69,6 +91,12 @@ class OdometryHandler(object):
         self.euler_yaw = calculate_yaw(msg)
         self.las_pos.x = msg.pose.pose.position.x
         self.las_pos.y = msg.pose.pose.position.y
+        print(abs(msg.twist.twist.linear.x))
+        if abs(msg.twist.twist.angular.z) < 0.01 and abs(msg.twist.twist.linear.x) < 0.01:
+            self.angular_speed = False
+            print("nie")
+        else:
+            self.angular_speed = True
         # x= msg.pose.pose.position.x
         # y= msg.pose.pose.position.y
         # inital laser position is (0.17,0) -> in equation we skip  multiplication by y
