@@ -53,7 +53,7 @@ class GridCell:
         sumy = 0
         self.point_num += self.points.__len__()
         # print(self.points.__len__())
-        if  self.points.__len__() < 3:
+        if  self.points.__len__() < 10:
             return False
 
         # self.angle = 90
@@ -70,7 +70,7 @@ class GridCell:
         x_arr = np.matrix([np.ones(self.points.__len__()),[x.x for x in self.points]])
         # x_arr_trans = x_arr.transpose()
         y_arr = np.matrix([y.y for y in self.points])
-        print("ilos" + str(self.points.__len__()) + "2: " + str(x_arr.size))
+        # print("ilos" + str(self.points.__len__()) + "2: " + str(x_arr.size))
         # print()
         # print(np.linalg.det(np.outer( x_arr, x_arr)))
         # w_lr =np.linalg.inv((np.outer( x_arr, x_arr)))
@@ -239,9 +239,11 @@ class Robot(object):
         # ax.set_xlim(-self.size, self.size)
         # ax.set_ylim(-self.size, self.size)
 
-        ax.set_xlim(-10, 10)
-        ax.set_ylim(-10,10)
+        # ax.set_xlim(-10, 10)
+        # ax.set_ylim(-10,10)
 
+        ax.set_xlim(-25, 25)
+        ax.set_ylim(-25,25)
         for cur_cell in self.cells_list:
 
             pos = cur_cell.get_average_position()

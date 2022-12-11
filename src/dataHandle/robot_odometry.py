@@ -89,14 +89,19 @@ class OdometryHandler(object):
         self.odomdata = msg
         self.rob_pos = msg.pose.pose.position
         self.euler_yaw = calculate_yaw(msg)
+        # if abs(msg.twist.twist.angular.z) > 0.01:
+        #     self.angular_speed = True
+        # else:
+        #     self.angular_speed = False
+        print(abs(self.euler_yaw))
         self.las_pos.x = msg.pose.pose.position.x
         self.las_pos.y = msg.pose.pose.position.y
         print(abs(msg.twist.twist.linear.x))
-        if abs(msg.twist.twist.angular.z) < 0.01 and abs(msg.twist.twist.linear.x) < 0.01:
-            self.angular_speed = False
-            print("nie")
-        else:
-            self.angular_speed = True
+        # if abs(msg.twist.twist.angular.z) < 0.01 and abs(msg.twist.twist.linear.x) < 0.01:
+        #     self.angular_speed = False
+        #     print("nie")
+        # else:
+        #     self.angular_speed = True
         # x= msg.pose.pose.position.x
         # y= msg.pose.pose.position.y
         # inital laser position is (0.17,0) -> in equation we skip  multiplication by y
